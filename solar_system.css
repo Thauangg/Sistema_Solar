@@ -1,0 +1,279 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.controls {
+    position: fixed;
+    top: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+button {
+    padding: 8px 16px;
+    background: #333;
+    color: white;
+    border: 1px solid #666;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #444;
+}
+
+.container {
+    font-size: 10px;
+    width: 80em;
+    height: 80em;
+    position: relative;
+    overflow: hidden;
+}
+
+.sun {
+    position: absolute;
+    top: 35em;
+    left: 35em;
+    width: 10em;
+    height: 10em;
+    background-color: rgb(255, 204, 0);
+    border-radius: 50%;
+    box-shadow: 0 0 3em white;
+    cursor: pointer;
+}
+
+.orbit {
+    position: absolute;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.1) transparent transparent;
+    border-width: 0.1em 0.1em 0 0;
+    border-radius: 50%;
+}
+
+.planet {
+    position: absolute;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Mercúrio */
+.mercury {
+    top: 30em;
+    left: 30em;
+    width: 20em;
+    height: 20em;
+    animation: orbit 8.8s linear infinite;
+}
+
+.mercury-planet {
+    top: 0.5em;
+    right: 0.5em;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: #888;
+}
+
+/* Vênus */
+.venus {
+    top: 25em;
+    left: 25em;
+    width: 30em;
+    height: 30em;
+    animation: orbit 22.5s linear infinite;
+}
+
+.venus-planet {
+    top: 1em;
+    right: 1em;
+    width: 2em;
+    height: 2em;
+    background-color: #e6b800;
+}
+
+/* Terra */
+.earth {
+    top: 20em;
+    left: 20em;
+    width: 40em;
+    height: 40em;
+    animation: orbit 36.5s linear infinite;
+}
+
+.earth-planet {
+    top: 2.8em;
+    right: 2.8em;
+    width: 3em;
+    height: 3em;
+    background-color: rgb(80, 80, 201);
+}
+
+/* Marte */
+.mars {
+    top: 15em;
+    left: 15em;
+    width: 50em;
+    height: 50em;
+    animation: orbit 68.7s linear infinite;
+}
+
+.mars-planet {
+    top: 2.3em;
+    right: 2.3em;
+    width: 2.5em;
+    height: 2.5em;
+    background-color: #cc4400;
+}
+
+.moon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8em;
+    height: 8em;
+    animation: orbit 5s linear infinite;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.1) transparent transparent;
+    border-width: 0.1em 0.1em 0 0;
+    border-radius: 50%;
+}
+
+.moon::before {
+    content: '';
+    position: absolute;
+    top: 0.8em;
+    right: 0.2em;
+    width: 1.2em;
+    height: 1.2em;
+    background-color: silver;
+    border-radius: 50%;
+}
+
+.info-box {
+    position: fixed;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+    pointer-events: none;
+}
+
+@keyframes orbit {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.paused {
+    animation-play-state: paused;
+}
+
+.planet-label {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 1.2em;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    z-index: 1000;
+}
+
+.planet:hover + .planet-label,
+.sun:hover + .planet-label {
+    opacity: 1;
+}
+
+.planet-panel {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    z-index: 1000;
+}
+
+.planet-panel h2 {
+    margin: 0 0 15px 0;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.planet-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.planet-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.planet-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.sun-dot {
+    background-color: rgb(255, 204, 0);
+    box-shadow: 0 0 5px rgb(255, 204, 0);
+}
+
+.mercury-dot {
+    background-color: #888;
+}
+
+.venus-dot {
+    background-color: #e6b800;
+}
+
+.earth-dot {
+    background-color: rgb(80, 80, 201);
+}
+
+.moon-dot {
+    background-color: silver;
+}
+
+.mars-dot {
+    background-color: #cc4400;
+}
+
+/* Adicione uma classe para destacar o planeta selecionado */
+.planet-item.active {
+    background: rgba(255, 255, 255, 0.2);
+}
